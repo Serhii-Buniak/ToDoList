@@ -2,7 +2,6 @@ import { AxiosResponse } from "axios"
 import instance from "."
 import { UserTask } from "./UserTaskApi"
 
-
 export interface Card {
    id: number
    title: string
