@@ -6,7 +6,7 @@ namespace ToDoList.Models;
 public record class UserTask
 {
     public long Id { get; set; }
-    [MaxLength(50)]
+    [MaxLength(200)]
     [Required(AllowEmptyStrings = false, ErrorMessage = "Text is required")]
     public string Text { get; set; }
     [JsonIgnore]

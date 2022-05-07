@@ -1,6 +1,7 @@
 import { useEffect } from "react"
-import CardsCreators from "../redux/cards/CardsCreators"
-import { getCards } from "../redux/cards/selectors"
+
+import { getCards } from "../redux/cards/cardsSelectors"
+import CardsThunks from "../redux/cards/CardsThunks"
 import { useAppDispatch, useAppSelector } from "../redux/hooks"
 import CardsList from "./CardsList"
 
@@ -9,8 +10,10 @@ const CardListContainer: React.FC = () => {
     const dispatch = useAppDispatch()
 
     useEffect(() => {
-        CardsCreators.initThunk()(dispatch)
+        dispatch(CardsThunks.init())
     }, [])
+
+
 
     return <CardsList cards={cards} />
 }

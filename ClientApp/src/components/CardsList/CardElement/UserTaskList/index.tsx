@@ -1,5 +1,15 @@
 import { UserTask } from "../../../../api/UserTaskApi"
+import { styled } from "../../../../styles/theme";
 import UserTaskElement from "./UserTaskElement"
+
+const UserTaskListStyled = styled.div`
+    & > * {
+        margin-bottom: 45px;
+        :last-child{
+            margin-bottom: 0;
+        }
+    }  
+`
 
 interface UserTaskListProps {
     tasks: UserTask[]
@@ -7,11 +17,11 @@ interface UserTaskListProps {
 
 const UserTaskList: React.FC<UserTaskListProps> = ({ tasks }) => {
     return (
-        <div>
+        <UserTaskListStyled>
             {tasks.map(t =>
-                <UserTaskElement task={t} />
+                <UserTaskElement key={t.id} task={t} />
             )}
-        </div>
+        </UserTaskListStyled>
     )
 }
 

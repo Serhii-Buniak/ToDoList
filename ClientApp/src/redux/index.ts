@@ -1,17 +1,16 @@
-import { CombinedState, combineReducers, configureStore, Reducer, Store } from '@reduxjs/toolkit'
-import thunk from 'redux-thunk'
-import AppAction from './action'
-import cardReducer from './cards/cardReducer'
-import State from './state'
+import { configureStore } from '@reduxjs/toolkit'
+import cardsReducer from './cards/cardReducer'
 
-const rootReducer: Reducer<CombinedState<State>, AppAction> = combineReducers({
-    cards: cardReducer,
-})
+const reducers = {
+    cards: cardsReducer
+}
 
-const store: Store<State, AppAction> = configureStore({
-    reducer: rootReducer,
-    middleware: [thunk] as const,
+const store = configureStore({
+    reducer: { ...reducers },
     devTools: true
 })
+
+export type AppState = ReturnType<typeof store.getState>
+export type AppDispatch = typeof store.dispatch
 
 export default store

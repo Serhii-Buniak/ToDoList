@@ -1,4 +1,4 @@
-import baseStyled, { ThemedStyledInterface, css as baseCss, ThemedCssFunction } from "styled-components";
+import baseStyled, { ThemedStyledInterface, css as baseCss, ThemedCssFunction, createGlobalStyle as baseCreateGlobalStyle } from "styled-components";
 
 
 const theme = {

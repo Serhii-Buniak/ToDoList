@@ -27,7 +27,7 @@ namespace ToDoList.Migrations
                 {
                     Id = table.Column<long>(type: "bigint", nullable: false)
                         .Annotation("SqlServer:Identity", "1, 1"),
-                    Text = table.Column<string>(type: "nvarchar(50)", maxLength: 50, nullable: false),
+                    Text = table.Column<string>(type: "nvarchar(200)", maxLength: 200, nullable: false),
                     CardId = table.Column<long>(type: "bigint", nullable: false),
                     Completed = table.Column<bool>(type: "bit", nullable: false)
                 },

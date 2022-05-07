@@ -16,11 +16,11 @@ interface TitleProps {
     children: React.ReactNode
 }
 
-const Title: React.FC<TitleProps> = () => {
+const Title: React.FC<TitleProps> = ({children}) => {
     return (
         <StyledTitle>
             <img src={leftTitlePart} alt="leftTitlePart" />
-            <span>ToDoList</span>
+            <span>{children}</span>
             <img src={rightTitlePart} alt="rightTitlePart" />
         </StyledTitle>
     )
