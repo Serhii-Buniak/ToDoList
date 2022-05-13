@@ -13,8 +13,6 @@ const CardListContainer: React.FC = () => {
         dispatch(CardsThunks.init())
     }, [])
 
-
-
     return <CardsList cards={cards} />
 }
 

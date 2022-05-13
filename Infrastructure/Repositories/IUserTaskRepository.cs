@@ -2,11 +2,7 @@
 
 namespace ToDoList.Infrastructure.Repositories;
 
-public interface IUserTaskRepository
+public interface IUserTaskRepository : IRepository<UserTask>
 {
-    public Task<UserTask> GetById(long id);
-    public Task ChangeText(long id, string newText);
-    public Task Delete(long id);
-    public Task ChangeCompleted(long id, bool completed);
-}
 
+}

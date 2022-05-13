@@ -1,6 +1,7 @@
 using Microsoft.EntityFrameworkCore;
 using ToDoList.Data;
 using ToDoList.Infrastructure.Repositories;
+using ToDoList.Infrastructure.Services;
 
 var builder = WebApplication.CreateBuilder(args);
 var services = builder.Services;
@@ -11,8 +12,9 @@ var connectionString = builder.Configuration.GetConnectionString("DefaultConnect
 services.AddDbContext<ApplicationDbContext>(options =>
     options.UseSqlServer(connectionString));
 
-services.AddTransient<ICardRepository, CardRepository>();
-services.AddTransient<IUserTaskRepository, UserTaskRepository>();
+services.AddTransient<IUnitOfWork, UnitOfWork>();
+services.AddTransient<ICardService, CardService>();
+services.AddTransient<IUserTaskService, UserTaskService>();
 
 const string corsName = "react-app";
 services.AddCors(options =>

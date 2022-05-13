@@ -1,6 +1,9 @@
 import { Route, Routes } from "react-router-dom";
 import styled from "styled-components";
 import CardListContainer from "./CardListContainer";
+import FormCard from "./FormCard";
+import AddFormCard from "./FormCard/AddFormCard";
+import EditFormCard from "./FormCard/EditFormCard";
 import AddButton from "./UI/AddButton";
 
 import Title from "./UI/Title";
@@ -31,6 +34,15 @@ const Main: React.FC = () => {
                     path='addcard'
                     element={<>
                         <Title>Add Card</Title>
+                        <AddFormCard />
+                    </>} />
+            </Routes>
+            <Routes>
+                <Route
+                    path='edit/:id'
+                    element={<>
+                        <Title>Add Card</Title>
+                        <EditFormCard />
                     </>} />
             </Routes>
         </MainStyled >

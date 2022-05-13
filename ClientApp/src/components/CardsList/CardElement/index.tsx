@@ -8,8 +8,8 @@ import UserTaskList from "./UserTaskList";
 const CardStyled = styled.div`
     border-radius: 20px;
     border: 2px solid ${t => t.theme.colors.btnSubmit};
-    margin: 0 auto;
     padding: 35px 50px;
+    margin: auto;
     width: 768px;
     .buttons {
         margin-top: 60px;
@@ -37,8 +37,8 @@ const CardElement: React.FC<CardProps> = ({ card, onDelete }) => {
             <CardTitleStyled>{card.title}</CardTitleStyled>
             <UserTaskList tasks={card.tasks} />
             <div className="buttons">
-                <LinkStyled onClick={onDeleteClick} type="cancel">Delete</LinkStyled>
-                <LinkStyled as={NavLink} to={'/edit'} type="sumbit">Edit</LinkStyled>
+                <LinkStyled onClick={onDeleteClick} btnstyle='cancel'>Delete</LinkStyled>
+                <LinkStyled as={NavLink} to={`/edit/${card.id}`} btnstyle='submit'>Edit</LinkStyled>
             </div>
         </CardStyled>
     )

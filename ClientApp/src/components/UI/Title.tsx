@@ -16,7 +16,7 @@ interface TitleProps {
     children: React.ReactNode
 }
 
-const Title: React.FC<TitleProps> = ({children}) => {
+const Title: React.FC<TitleProps> = ({ children }) => {
     return (
         <StyledTitle>
             <img src={leftTitlePart} alt="leftTitlePart" />

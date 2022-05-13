@@ -11,7 +11,6 @@ const CardsListStyled = styled.div`
             margin-bottom: 0;
         }
     }
-
 `
 
 interface CardsListProps {

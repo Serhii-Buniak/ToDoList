@@ -6,9 +6,6 @@ import { styled } from "./styles/theme"
 
 
 const App: React.FC = () => {
-  
-
-
   return (
     <>
       <Main />

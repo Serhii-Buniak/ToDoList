@@ -1,5 +1,5 @@
 ﻿using Microsoft.AspNetCore.Mvc;
-using ToDoList.Infrastructure.Repositories;
+using ToDoList.Infrastructure.Services;
 using ToDoList.Models;
 
 namespace ToDoList.Controllers;
@@ -8,17 +8,17 @@ namespace ToDoList.Controllers;
 [Route("[controller]")]
 public class CardController : ControllerBase
 {
-    private readonly ICardRepository _boardRep;
+    private readonly ICardService _boardService;
 
-    public CardController(ICardRepository boardRep)
+    public CardController(ICardService boardService)
     {
-        _boardRep = boardRep;
+        _boardService = boardService;
     }
 
     [HttpGet]
-    public IEnumerable<Card> Get()
+    public async Task<IActionResult> Get()
     {
-        return _boardRep.Boards;
+        return Ok(await _boardService.GetCards());
     }
 
     [HttpGet("{id}")]
@@ -26,8 +26,8 @@ public class CardController : ControllerBase
     {
         try
         {
-            Card board = await _boardRep.GetById(id);
-            return Ok(board);
+            Card card = await _boardService.GetById(id);
+            return Ok(card);
         }
         catch (NullReferenceException ex)
         {
@@ -38,14 +38,14 @@ public class CardController : ControllerBase
     [HttpPost]
     public async Task<IActionResult> Create(Card card)
     {
-        await _boardRep.Add(card);
+        await _boardService.Add(card);
         return Ok();
     }
 
     [HttpPut]
     public async Task<IActionResult> Update(Card card)
     {
-        await _boardRep.Update(card);
+        await _boardService.Update(card);
         return Ok();
     }
 
@@ -54,7 +54,7 @@ public class CardController : ControllerBase
     {
         try
         {
-            await _boardRep.Delete(id);
+            await _boardService.Delete(id);
             return Ok();
         }
         catch (NullReferenceException ex)

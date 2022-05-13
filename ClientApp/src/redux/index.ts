@@ -1,8 +1,10 @@
 import { configureStore } from '@reduxjs/toolkit'
 import cardsReducer from './cards/cardReducer'
+import taskFormReducer from './taskForm/taskFormReducer'
 
 const reducers = {
-    cards: cardsReducer
+    cards: cardsReducer,
+    taskForm: taskFormReducer,
 }
 
 const store = configureStore({

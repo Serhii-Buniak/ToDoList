@@ -21,13 +21,15 @@ export interface CardsChangeTaskTextAction {
 export interface CardsDeleteAction {
     id: number
 }
+export interface CardsAddAction {
+    card: Card
+}
 
 class CardsThunks {
 
     public readonly init = createAsyncThunk(
         'cards/init',
         async function (_, { dispatch }) {
-            console.log('response')
             const response = await CardApi.getItems()
             const items = response.data
             dispatch(cardsActions.init({ cards: items }))
@@ -65,6 +67,14 @@ class CardsThunks {
         async (props: CardsDeleteAction, thunkAPI) => {
             await CardApi.delete(props.id)
             thunkAPI.dispatch(cardsActions.delete({ id: props.id }))
+        }
+    )
+
+    public readonly deleteTask = createAsyncThunk(
+        'cards/delete',
+        async (id: number, thunkAPI) => {
+            await UserTaskApi.delete(id)
+            thunkAPI.dispatch(cardsActions.deleteTask(id))
         }
     )
 }

@@ -1,5 +1,5 @@
 ﻿using Microsoft.AspNetCore.Mvc;
-using ToDoList.Infrastructure.Repositories;
+using ToDoList.Infrastructure.Services;
 using ToDoList.Models;
 
 namespace ToDoList.Controllers;
@@ -8,11 +8,11 @@ namespace ToDoList.Controllers;
 [Route("[controller]")]
 public class UserTaskController : ControllerBase
 {
-    private readonly IUserTaskRepository _taskRep;
+    private readonly IUserTaskService _taskService;
 
-    public UserTaskController(IUserTaskRepository taskRep)
+    public UserTaskController(IUserTaskService taskService)
     {
-        _taskRep = taskRep;
+        _taskService = taskService;
     }
 
     [HttpPatch("[action]/{id}")]
@@ -20,7 +20,7 @@ public class UserTaskController : ControllerBase
     {
         try
         {
-            await _taskRep.ChangeText(id, newText);
+            await _taskService.ChangeText(id, newText);
             return Ok();
         }
         catch (NullReferenceException ex)
@@ -34,29 +34,12 @@ public class UserTaskController : ControllerBase
     {
         try
         {
-            await _taskRep.ChangeCompleted(id, completed);
+            await _taskService.ChangeCompleted(id, completed);
             return Ok();
         }
         catch (NullReferenceException ex)
         {
             return NotFound(new { Error = ex.Message });
-        }
-    }
-
-    [HttpDelete("{id}")]
-    public async Task<IActionResult> ChangeText([FromRoute] long id)
-    {
-        try
-        {
-            await _taskRep.Delete(id);
-            return Ok();
-        }
-        catch (NullReferenceException ex)
-        {
-            return NotFound(new
-            {
-                Error = ex.Message
-            });
         }
     }
 }

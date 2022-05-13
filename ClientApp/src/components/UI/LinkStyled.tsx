@@ -1,7 +1,7 @@
 import { styled } from "../../styles/theme"
 
 interface LinkStyledProps {
-    type: 'sumbit' | 'cancel'
+    btnstyle: 'submit' | 'cancel'
 }
 
 const LinkStyled = styled.a<LinkStyledProps>`
@@ -16,12 +16,12 @@ const LinkStyled = styled.a<LinkStyledProps>`
     align-items: center;
     justify-content: center;
     cursor: pointer;
-    background: ${p => p.type === 'sumbit'
+    background: ${p => p.btnstyle === 'submit'
         ? p.theme.colors.btnSubmit
         : p.theme.colors.btnCancel
     };
     :hover {
-        outline: 10px solid ${p => p.type === 'sumbit'
+        outline: 10px solid ${p => p.btnstyle === 'submit'
         ? p.theme.colors.btnSubmit + '33'
         : p.theme.colors.btnCancel + '33'};
     }

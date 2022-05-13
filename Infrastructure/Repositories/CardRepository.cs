@@ -4,43 +4,17 @@ using ToDoList.Models;
 
 namespace ToDoList.Infrastructure.Repositories;
 
-public class CardRepository : ICardRepository
+public class CardRepository : Repository<Card>, ICardRepository
 {
-    private readonly ApplicationDbContext _context;
+    public CardRepository(ApplicationDbContext context) : base(context) { }
 
-    public CardRepository(ApplicationDbContext context)
+    public override async Task<IEnumerable<Card>> GetEntitiesAsync()
     {
-        _context = context;
-    }
-    public IQueryable<Card> Boards => _context.Cards.Include(b => b.Tasks);
-
-    public async Task Add(Card card)
-    {
-        await _context.Cards.AddAsync(card);
-        await _context.SaveChangesAsync();
-    }
-    public async Task Update(Card card)
-    {
-        Card oldCard = await GetById(card.Id);
-        oldCard.Tasks = card.Tasks;
-        _context.Cards.Update(card);
-        await _context.SaveChangesAsync();
+        return await _entities.Include(c => c.Tasks).ToListAsync();
     }
 
-    public async Task<Card> GetById(long id)
+    public override async Task<Card> FindAsync(long id)
     {
-        Card card = await Boards.FirstOrDefaultAsync(b => b.Id == id);
-
-        if (card == null)
-            throw new NullReferenceException("Board not found");
-
-        return card;
-    }
-
-    public async Task Delete(long id)
-    {
-        _context.Cards.Remove(await GetById(id));
-        await _context.SaveChangesAsync();
+        return await _entities.Include(c => c.Tasks).FirstOrDefaultAsync(c => c.Id == id);
     }
 }
-

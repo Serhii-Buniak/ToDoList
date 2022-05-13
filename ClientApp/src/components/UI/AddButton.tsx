@@ -15,7 +15,7 @@ const AddButtonStyled = styled(NavLink)`
     :hover {
         outline: 10px solid #ffffff35;
     }
-    img{
+    img {
         border-radius: 50%;
         cursor: pointer;
     }

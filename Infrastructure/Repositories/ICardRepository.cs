@@ -2,11 +2,7 @@
 
 namespace ToDoList.Infrastructure.Repositories;
 
-public interface ICardRepository
+public interface ICardRepository : IRepository<Card>
 {
-    public Task Add(Card card);
-    public Task<Card> GetById(long id);
-    public IQueryable<Card> Boards { get; }
-    public Task Delete(long id);
-    public Task Update(Card card);
+
 }

@@ -1,6 +1,6 @@
 import { createSlice, PayloadAction } from "@reduxjs/toolkit"
 import { Card } from "../../api/CardApi"
-import { CardsChangeTaskComletedAction, CardsChangeTaskTextAction, CardsDeleteAction, CardsInitAction } from "./CardsThunks"
+import { CardsAddAction, CardsChangeTaskComletedAction, CardsChangeTaskTextAction, CardsDeleteAction, CardsInitAction } from "./CardsThunks"
 
 interface CardsState {
     list: Card[]
@@ -28,18 +28,32 @@ export const cardsSlice = createSlice({
             state.list.forEach(card => card.tasks
                 .map(task => task.id === id
                     ? task.text = text
-                    : task))
+                    : task
+                )
+            )
+        },
+        deleteTask: (state, action: PayloadAction<number>) => {
+            const id = action.payload
+            state.list.forEach(card => card.tasks
+                .filter(task => task.id !== id)
+            )
         },
         delete: (state, action: PayloadAction<CardsDeleteAction>) => {
             const id = action.payload.id
             state.list = state.list.filter(card => card.id !== id)
+        },
+        add: (state, action: PayloadAction<CardsAddAction>) => {
+            const card = action.payload.card
+            state.list.push(card)
+        },
+        update: (state, action: PayloadAction<CardsAddAction>) => {
+            const card = action.payload.card
+            state.list[card.id] = card
         }
-    },
-
-});
+    }
+})
 
 
 export const cardsActions = cardsSlice.actions
 
-console.log(cardsSlice.getInitialState)
 export default cardsSlice.reducer
